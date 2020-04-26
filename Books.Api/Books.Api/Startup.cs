@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Books.Api.Contexts;
+using Books.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,15 @@ namespace Books.Api
             // it is better to store the connection string in an enviroment variable)
             var connectionString = Configuration["ConnectionStrings:BooksDBConnectionString"];
             services.AddDbContext<BooksContext>(o => o.UseSqlServer(connectionString));
+
+            // should be registered with "Scoped", Or "Transient", Or "SingletonLifeTime"?
+            // in our case the "repository" is a services that uses "BooksContext", and the "BookContext" is a "DbContext"
+            // which means we must register it with a scope that is equal to or shorter than the "DbContext" Scope.
+            // "Singleton" will have life time larger than the "DbContext" scope, and in that case the "BookContext" will have Uncorrect state when processing subsequent requests.
+            // "Transient" scope, with "Transient" in each request for a service we will have a new instance served up, which means we will lose any state our repository might hold if it is requested by multiple parts of our code.
+            // Note: EFCore dispose DbContext after every request, for "Singleton" scope, all records that were once read across requests would be tracked by "DbContext" by default, and that means that eventually performance would get lower when 
+            // more and  more entities would be tracked
+            services.AddScoped<IBooksRepository, BooksRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
