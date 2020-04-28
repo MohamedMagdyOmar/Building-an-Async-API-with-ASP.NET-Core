@@ -15,3 +15,4 @@ D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\ne
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.dll
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.pdb
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.genruntimeconfig.cache
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.csprojAssemblyReference.cache

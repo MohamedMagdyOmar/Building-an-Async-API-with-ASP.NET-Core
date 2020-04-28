@@ -34,6 +34,8 @@ namespace Books.Api
                     logger.LogError(e, "An error occured while migrating the database.");
                 }
 
+                // run the web app
+                host.Run();
             }
         }
 
