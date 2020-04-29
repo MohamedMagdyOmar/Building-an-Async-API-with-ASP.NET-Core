@@ -8,8 +8,8 @@ namespace Books.Api.Services
     public interface IBooksRepository
     {
         // these for Sync Method
-        //IEnumerable<Entities.Book> GetBooks();
-        //Entities.Book GetBook(Guid id);
+        IEnumerable<Entities.Book> GetBooks();
+        Entities.Book GetBook(Guid id);
 
         // same as above but for async
         Task<IEnumerable<Entities.Book>> GetBooksAsync();

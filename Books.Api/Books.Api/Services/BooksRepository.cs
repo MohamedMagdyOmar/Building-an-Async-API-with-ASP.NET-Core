@@ -20,12 +20,16 @@ namespace Books.Api.Services
 
         public async Task<IEnumerable<Book>> GetBooksAsync()
         {
+            // simulate Long IO Operation
+            await _context.Database.ExecuteSqlCommandAsync("WAITFOR DELAY '00:00:02';");
+
             // we added Include to include Author with the books
             return await _context.Books.Include(b => b.Author).ToListAsync();
         }
 
         public async Task<Book> GetBookAsync(Guid id)
         {
+            
             return await _context.Books.Include(b => b.Author).FirstOrDefaultAsync(b => b.Id == id);
         }
 
@@ -48,6 +52,18 @@ namespace Books.Api.Services
                     _context = null;
                 }
             }
+        }
+
+        public IEnumerable<Book> GetBooks()
+        {
+            // simulate Long IO Operation
+            _context.Database.ExecuteSqlCommand("WAITFOR DELAY '00:00:02';");
+            return _context.Books.Include(b => b.Author).ToList();
+        }
+
+        public Book GetBook(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
