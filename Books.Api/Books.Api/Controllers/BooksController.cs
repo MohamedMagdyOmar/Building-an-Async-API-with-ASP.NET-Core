@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Books.Api.Filters;
 using Books.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +21,7 @@ namespace Books.Api.Controllers
         }
 
         [HttpGet]
+        [BooksResultFilter]
         public async Task<IActionResult> GetBooks()
         {
             var books = await _booksRepository.GetBooksAsync();
@@ -26,7 +29,8 @@ namespace Books.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [BookResultFilter]
+        [Route("{id}")]      
         public async Task<IActionResult> GetBook(Guid id)
         {
             var book = await _booksRepository.GetBookAsync(id);

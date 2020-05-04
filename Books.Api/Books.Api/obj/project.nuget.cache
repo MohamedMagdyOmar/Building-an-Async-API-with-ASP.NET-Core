@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "EZeb7kETAZXrM3DLFu0VlU4hjwxQXcVbuMqXw22SLQMq0bgjcWEPWL32GC94ICAg5lDpqQitNb+Al0hHNRv+nA==",
+  "dgSpecHash": "WTGMrDKnjyi6rUpbPjoZQD+kyhlRtW7JuOBtQJPN3Z8fBg5GcMkwPboo4w9BwRetybdRcM04+7Dfn5JBWx6Yzg==",
   "success": true,
   "projectFilePath": "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Api\\Books.Api\\Books.Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\eng_m\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
+    "C:\\Users\\eng_m\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.aspnetcore\\2.1.1\\microsoft.aspnetcore.2.1.1.nupkg.sha512",
     "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.1.1\\microsoft.aspnetcore.antiforgery.2.1.1.nupkg.sha512",
