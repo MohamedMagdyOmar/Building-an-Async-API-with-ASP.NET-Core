@@ -6,7 +6,6 @@ D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\bin\Debug\ne
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\bin\Debug\netcoreapp2.1\Books.Api.runtimeconfig.dev.json
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\bin\Debug\netcoreapp2.1\Books.Api.dll
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\bin\Debug\netcoreapp2.1\Books.Api.pdb
-D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.csproj.CoreCompileInputs.cache
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.RazorAssemblyInfo.cache
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.RazorAssemblyInfo.cs
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.AssemblyInfoInputs.cache
@@ -15,3 +14,5 @@ D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\ne
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.dll
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.pdb
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.genruntimeconfig.cache
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.csprojAssemblyReference.cache
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Api\Books.Api\obj\Debug\netcoreapp2.1\Books.Api.csproj.CoreCompileInputs.cache

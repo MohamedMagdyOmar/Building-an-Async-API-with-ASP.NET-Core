@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Books.Api.Contexts;
 using Microsoft.AspNetCore;
@@ -17,6 +18,8 @@ namespace Books.Api
     {
         public static void Main(string[] args)
         {
+            // set the available threads to amount of processors
+            ThreadPool.SetMaxThreads(Environment.ProcessorCount, Environment.ProcessorCount);
             var host = CreateWebHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
@@ -34,6 +37,8 @@ namespace Books.Api
                     logger.LogError(e, "An error occured while migrating the database.");
                 }
 
+                // run the web app
+                host.Run();
             }
         }
 

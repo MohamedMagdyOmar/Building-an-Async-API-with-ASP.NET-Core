@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Books.Api.Contexts;
 using Books.Api.Services;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +45,8 @@ namespace Books.Api
             // Note: EFCore dispose DbContext after every request, for "Singleton" scope, all records that were once read across requests would be tracked by "DbContext" by default, and that means that eventually performance would get lower when 
             // more and  more entities would be tracked
             services.AddScoped<IBooksRepository, BooksRepository>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,12 +56,7 @@ namespace Books.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
