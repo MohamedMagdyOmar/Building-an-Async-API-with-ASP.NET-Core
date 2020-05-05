@@ -84,5 +84,10 @@ namespace Books.Api.Services
             // return true if one or more entites were changed
             return (await _context.SaveChangesAsync() > 0);
         }
+
+        public async Task<IEnumerable<Entities.Book>> GetBooksAsync(IEnumerable<Guid> bookIds)
+        {
+            return await _context.Books.Where(b => bookIds.Contains(b.Id)).Include(b => b.Author).ToListAsync();
+        }
     }
 }
