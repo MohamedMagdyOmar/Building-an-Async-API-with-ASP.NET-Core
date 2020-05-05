@@ -65,5 +65,29 @@ namespace Books.Api.Services
         {
             throw new NotImplementedException();
         }
+
+        public void AddBook(Book bookToAdd)
+        {
+            if(bookToAdd == null)
+            {
+                throw new ArgumentException(nameof(bookToAdd));
+            }
+
+            // note that we did not use async in this method (look at the note of the implementation of "AddAsync"), because it is used in special case only as mentioned in the comment
+            // so it keeps tracking of the entity only, and the data is not yet persisting it to the database, it is only added to "BooksDbSet", and so it is not IO operation,
+            // so there is no need to use async, and await, and no need to use "AddAsync", we will use just "Add".
+             _context.Books.Add(bookToAdd);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            // return true if one or more entites were changed
+            return (await _context.SaveChangesAsync() > 0);
+        }
+
+        public async Task<IEnumerable<Entities.Book>> GetBooksAsync(IEnumerable<Guid> bookIds)
+        {
+            return await _context.Books.Where(b => bookIds.Contains(b.Id)).Include(b => b.Author).ToListAsync();
+        }
     }
 }
