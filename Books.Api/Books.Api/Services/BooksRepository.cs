@@ -120,5 +120,33 @@ namespace Books.Api.Services
 
             return null;
         }
+
+        public async Task<IEnumerable<BookCover>> GetBookCoversAsync(Guid bookId)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var bookCovers = new List<BookCover>();
+
+            // create list of fake bookCovers
+            var bookCoverUrls = new[]
+            {
+                $"http://localhost:52644/api/bookcovers/{bookId}-dummycover1",
+                $"http://localhost:52644/api/bookcovers/{bookId}-dummycover2",
+                $"http://localhost:52644/api/bookcovers/{bookId}-dummycover3",
+                $"http://localhost:52644/api/bookcovers/{bookId}-dummycover4",
+                $"http://localhost:52644/api/bookcovers/{bookId}-dummycover5"
+            };
+        
+            foreach(var bookCoverUrl in bookCoverUrls)
+            {
+                var response = await httpClient.GetAsync(bookCoverUrl);
+
+                if(response.IsSuccessStatusCode)
+                {
+                    bookCovers.Add(JsonConvert.DeserializeObject<BookCover>(await response.Content.ReadAsStringAsync()));
+                }
+            }
+
+            return bookCovers;
+        }
     }
 }
