@@ -1,0 +1,9 @@
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\bin\Debug\netcoreapp2.0\Books.Legacy.deps.json
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\bin\Debug\netcoreapp2.0\Books.Legacy.dll
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\bin\Debug\netcoreapp2.0\Books.Legacy.pdb
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\obj\Debug\netcoreapp2.0\Books.Legacy.csprojAssemblyReference.cache
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\obj\Debug\netcoreapp2.0\Books.Legacy.csproj.CoreCompileInputs.cache
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\obj\Debug\netcoreapp2.0\Books.Legacy.AssemblyInfoInputs.cache
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\obj\Debug\netcoreapp2.0\Books.Legacy.AssemblyInfo.cs
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\obj\Debug\netcoreapp2.0\Books.Legacy.dll
+D:\Repo\Building-an-Async-API-with-ASP.NET-Core\Books.Legacy\obj\Debug\netcoreapp2.0\Books.Legacy.pdb

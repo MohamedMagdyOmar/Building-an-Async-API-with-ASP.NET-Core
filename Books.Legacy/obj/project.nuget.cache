@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "7jVahOGSkSd8hIJ7nwsbrQo9GvYrmMrtjdgQGERes0oMDjnL6DrI/2hcJfVq3OkyOA7waOsOLx2Nj3K7iwnLLA==",
+  "success": true,
+  "projectFilePath": "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\Books.Legacy.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.netcore.app\\2.0.0\\microsoft.netcore.app.2.0.0.nupkg.sha512",
+    "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.0.0\\microsoft.netcore.dotnetapphost.2.0.0.nupkg.sha512",
+    "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.0.0\\microsoft.netcore.dotnethostpolicy.2.0.0.nupkg.sha512",
+    "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.0.0\\microsoft.netcore.dotnethostresolver.2.0.0.nupkg.sha512",
+    "C:\\Users\\eng_m\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\eng_m\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
