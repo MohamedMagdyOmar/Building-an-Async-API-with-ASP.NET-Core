@@ -3,6 +3,7 @@ using Books.Api.Entities;
 using Books.Api.ExternalModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,17 @@ namespace Books.Api.Services
     {
         private BooksContext _context;
         private IHttpClientFactory _httpClientFactory;
+        private ILogger<BooksRepository> _logger;
 
         // manages and sends notifications to the individual cancellation tokens.
         // it implements disposable, so we have to dispose it when the repository is disposed
         private CancellationTokenSource _cancellationTokenSource;
 
-        public BooksRepository(BooksContext context, IHttpClientFactory httpClientFactory)
+        public BooksRepository(BooksContext context, IHttpClientFactory httpClientFactory, ILogger<BooksRepository> logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         } 
 
 
@@ -168,7 +171,29 @@ namespace Books.Api.Services
             // when still need to do something when all covers have been downloaded, we need to return them.
             // using below line, task that is not completed untill every task in the collection has been completed, as each task in the collection
             // has a potential result of one "BookCover"
-            return await Task.WhenAll(downloadBookCoverTasks);
+
+            try
+            {
+                return await Task.WhenAll(downloadBookCoverTasks);
+            }
+            catch (OperationCanceledException operationCanceledException)
+            {
+
+                _logger.LogInformation($"{operationCanceledException.Message}");
+                foreach(var task in downloadBookCoverTasks)
+                {
+                    _logger.LogInformation($"Task {task.Id} has status {task.Status}");
+                }
+
+                return new List<BookCover>();
+            }
+            catch(Exception exception)
+            {
+                // to handle any other exception that we are not expecting
+                _logger.LogError($"{exception.Message}");
+                throw;
+            }
+            
         }
 
         private async Task<BookCover> DownloadBookCoverAsync(HttpClient httpClient, string bookCoverUrl, CancellationToken cancellationToken)
