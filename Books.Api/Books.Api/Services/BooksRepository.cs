@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Books.Api.Services
@@ -16,6 +17,10 @@ namespace Books.Api.Services
     {
         private BooksContext _context;
         private IHttpClientFactory _httpClientFactory;
+
+        // manages and sends notifications to the individual cancellation tokens.
+        // it implements disposable, so we have to dispose it when the repository is disposed
+        private CancellationTokenSource _cancellationTokenSource;
 
         public BooksRepository(BooksContext context, IHttpClientFactory httpClientFactory)
         {
@@ -56,6 +61,11 @@ namespace Books.Api.Services
                 {
                     _context.Dispose();
                     _context = null;
+                }
+                if(_cancellationTokenSource != null)
+                {
+                    _cancellationTokenSource.Dispose();
+                    _cancellationTokenSource = null;
                 }
             }
         }
@@ -125,12 +135,15 @@ namespace Books.Api.Services
         {
             var httpClient = _httpClientFactory.CreateClient();
             var bookCovers = new List<BookCover>();
+            _cancellationTokenSource = new CancellationTokenSource();
 
+            // this is the token that we need to pass to each task that we want to listen to cancellation
+            
             // create list of fake bookCovers
             var bookCoverUrls = new[]
             {
                 $"http://localhost:52644/api/bookcovers/{bookId}-dummycover1",
-                $"http://localhost:52644/api/bookcovers/{bookId}-dummycover2",
+                $"http://localhost:52644/api/bookcovers/{bookId}-dummycover2?returnFault=true",
                 $"http://localhost:52644/api/bookcovers/{bookId}-dummycover3",
                 $"http://localhost:52644/api/bookcovers/{bookId}-dummycover4",
                 $"http://localhost:52644/api/bookcovers/{bookId}-dummycover5"
@@ -147,7 +160,7 @@ namespace Books.Api.Services
             //}
 
             //we do not want to start downloading yet, that task will start when the query is evaluated, so we are using LINQ deferred execution
-            var downloadBookCoverTaskQuery = from bookCoverUrl in bookCoverUrls select DownloadBookCoverAsync(httpClient, bookCoverUrl);
+            var downloadBookCoverTaskQuery = from bookCoverUrl in bookCoverUrls select DownloadBookCoverAsync(httpClient, bookCoverUrl, _cancellationTokenSource.Token);
 
             // start the tasks
             var downloadBookCoverTasks = downloadBookCoverTaskQuery.ToList();
@@ -158,9 +171,9 @@ namespace Books.Api.Services
             return await Task.WhenAll(downloadBookCoverTasks);
         }
 
-        private async Task<BookCover> DownloadBookCoverAsync(HttpClient httpClient, string bookCoverUrl)
+        private async Task<BookCover> DownloadBookCoverAsync(HttpClient httpClient, string bookCoverUrl, CancellationToken cancellationToken)
         {
-            var response = await httpClient.GetAsync(bookCoverUrl);
+            var response = await httpClient.GetAsync(bookCoverUrl, cancellationToken);
 
             if(response.IsSuccessStatusCode)
             {
@@ -168,6 +181,11 @@ namespace Books.Api.Services
 
                 return bookCover;
             }
+
+            // we need when we API call fails(response not successfull), we need all tasks to recieve notification of this once a cancellation token has been called
+            // here we are just requesting cancellation, we also need letting the listener know that the cancellation was requested
+            // so we need to cancel the download so we will update line 176 to include cancellationToken
+            _cancellationTokenSource.Cancel();
 
             return null;
         }
