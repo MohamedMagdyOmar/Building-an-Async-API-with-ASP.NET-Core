@@ -6,7 +6,6 @@ D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\bin\Debug\netcore
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\bin\Debug\netcoreapp2.1\BookCovers.API.runtimeconfig.dev.json
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\bin\Debug\netcoreapp2.1\BookCovers.API.dll
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\bin\Debug\netcoreapp2.1\BookCovers.API.pdb
-D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\obj\Debug\netcoreapp2.1\BookCovers.API.csprojAssemblyReference.cache
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\obj\Debug\netcoreapp2.1\BookCovers.API.csproj.CoreCompileInputs.cache
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\obj\Debug\netcoreapp2.1\BookCovers.API.RazorAssemblyInfo.cache
 D:\Repo\Building-an-Async-API-with-ASP.NET-Core\BookCovers.API\obj\Debug\netcoreapp2.1\BookCovers.API.RazorAssemblyInfo.cs

@@ -1,6 +1,7 @@
 ﻿using Books.Api.Contexts;
 using Books.Api.Entities;
 using Books.Api.ExternalModels;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -43,8 +44,25 @@ namespace Books.Api.Services
 
         public async Task<Book> GetBookAsync(Guid id)
         {
-            
+            // we are using this logger to make sure that this method runs on different thread than the method "GetBookPages"
+            _logger.LogInformation($"ThreadId when entering GetBookAsync: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+
+            // when we call the "CalculateBookPages" method, we will blocked by this method for 5 sec waiting to be finished.
+            // so we need this part of code to be offloaded to be run on different thread
+            var bookPages = await GetBookPages();
+
             return await _context.Books.Include(b => b.Author).FirstOrDefaultAsync(b => b.Id == id);
+        }
+
+        public Task<int> GetBookPages()
+        {
+            // this long running task will run on a new thread
+            return Task.Run(() =>
+            {
+                _logger.LogInformation($"ThreadId when entering GetBookPages: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+                var pageCalculator = new Books.Legacy.ComplicatedPageCalculator();
+                return pageCalculator.CalculateBookPages();
+            });
         }
 
         // when the clr disposes the repository, we want to check if the context is not null, and we want to call dispose on that context, that insures that it get dispose

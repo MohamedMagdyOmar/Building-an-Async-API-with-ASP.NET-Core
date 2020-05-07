@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\Books.Legacy.csproj": {}
+  },
+  "projects": {
+    "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\Books.Legacy.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\Books.Legacy.csproj",
+        "projectName": "Books.Legacy",
+        "projectPath": "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\Books.Legacy.csproj",
+        "packagesPath": "C:\\Users\\eng_m\\.nuget\\packages\\",
+        "outputPath": "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\eng_m\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.0": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

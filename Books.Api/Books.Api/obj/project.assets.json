@@ -4641,6 +4641,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "Books.Legacy/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Books.Legacy.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Books.Legacy.dll": {}
+        }
       }
     }
   },
@@ -12667,11 +12677,17 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "Books.Legacy/1.0.0": {
+      "type": "project",
+      "path": "../../Books.Legacy/Books.Legacy.csproj",
+      "msbuildProject": "../../Books.Legacy/Books.Legacy.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
+      "Books.Legacy >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
@@ -12703,7 +12719,11 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\Books.Legacy.csproj": {
+              "projectPath": "D:\\Repo\\Building-an-Async-API-with-ASP.NET-Core\\Books.Legacy\\Books.Legacy.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
