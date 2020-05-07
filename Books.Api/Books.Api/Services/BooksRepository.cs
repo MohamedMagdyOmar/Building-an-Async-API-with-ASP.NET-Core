@@ -135,18 +135,41 @@ namespace Books.Api.Services
                 $"http://localhost:52644/api/bookcovers/{bookId}-dummycover4",
                 $"http://localhost:52644/api/bookcovers/{bookId}-dummycover5"
             };
-        
-            foreach(var bookCoverUrl in bookCoverUrls)
-            {
-                var response = await httpClient.GetAsync(bookCoverUrl);
 
-                if(response.IsSuccessStatusCode)
-                {
-                    bookCovers.Add(JsonConvert.DeserializeObject<BookCover>(await response.Content.ReadAsStringAsync()));
-                }
+            //foreach(var bookCoverUrl in bookCoverUrls)
+            //{
+            //    var response = await httpClient.GetAsync(bookCoverUrl);
+
+            //    if(response.IsSuccessStatusCode)
+            //    {
+            //        bookCovers.Add(JsonConvert.DeserializeObject<BookCover>(await response.Content.ReadAsStringAsync()));
+            //    }
+            //}
+
+            //we do not want to start downloading yet, that task will start when the query is evaluated, so we are using LINQ deferred execution
+            var downloadBookCoverTaskQuery = from bookCoverUrl in bookCoverUrls select DownloadBookCoverAsync(httpClient, bookCoverUrl);
+
+            // start the tasks
+            var downloadBookCoverTasks = downloadBookCoverTaskQuery.ToList();
+
+            // when still need to do something when all covers have been downloaded, we need to return them.
+            // using below line, task that is not completed untill every task in the collection has been completed, as each task in the collection
+            // has a potential result of one "BookCover"
+            return await Task.WhenAll(downloadBookCoverTasks);
+        }
+
+        private async Task<BookCover> DownloadBookCoverAsync(HttpClient httpClient, string bookCoverUrl)
+        {
+            var response = await httpClient.GetAsync(bookCoverUrl);
+
+            if(response.IsSuccessStatusCode)
+            {
+                var bookCover = JsonConvert.DeserializeObject<BookCover>(await response.Content.ReadAsStringAsync());
+
+                return bookCover;
             }
 
-            return bookCovers;
+            return null;
         }
     }
 }
