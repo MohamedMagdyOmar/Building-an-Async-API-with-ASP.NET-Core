@@ -1,9 +1,13 @@
 ﻿using Books.Api.Contexts;
 using Books.Api.Entities;
+using Books.Api.ExternalModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Books.Api.Services
@@ -11,10 +15,12 @@ namespace Books.Api.Services
     public class BooksRepository : IBooksRepository, IDisposable
     {
         private BooksContext _context;
+        private IHttpClientFactory _httpClientFactory;
 
-        public BooksRepository(BooksContext context)
+        public BooksRepository(BooksContext context, IHttpClientFactory httpClientFactory)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
         } 
 
 
@@ -88,6 +94,31 @@ namespace Books.Api.Services
         public async Task<IEnumerable<Entities.Book>> GetBooksAsync(IEnumerable<Guid> bookIds)
         {
             return await _context.Books.Where(b => bookIds.Contains(b.Id)).Include(b => b.Author).ToListAsync();
+        }
+
+        public async Task<BookCover> GetBookCoverAsync(string coverId)
+        {
+            // when we call api from another api, we open HttpClient Instance once and reuse it across requests
+            // so normally we are writing: var client = new HttpClient();
+            // but in Core 2.1, new helper class has been introduced -> HttpClientFactory
+            // using this factory handles creating and disposing of httpClient instances and it controls the 
+            // reuse, creation, and disposing of HTTP Handlers used by those HTTPClient
+
+            var httpClient = _httpClientFactory.CreateClient();
+
+            // pass through a dummy name
+            // this a network call, so we are using await
+            var response = await httpClient.GetAsync($"http://localhost:52644/api/bookcovers/{coverId}");
+
+            if(response.IsSuccessStatusCode)
+            {
+                // deserialize to BookCover
+                // note we are using ReadAsStringAsync, because for GetAsync to finish, and the response to start arriving
+                // in other words the response is not necessarily fully transferred yet, nor it is completely buffered, so it is still IO Operation
+                return JsonConvert.DeserializeObject<BookCover>(await response.Content.ReadAsStringAsync());
+            }
+
+            return null;
         }
     }
 }

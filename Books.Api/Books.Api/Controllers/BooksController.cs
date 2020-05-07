@@ -39,6 +39,8 @@ namespace Books.Api.Controllers
             var book = await _booksRepository.GetBookAsync(id);
             if (book == null) return NotFound("Book is not found");
 
+            var bookCover = await _booksRepository.GetBookCoverAsync("dummycover");
+
             return Ok(book);
         }
 
