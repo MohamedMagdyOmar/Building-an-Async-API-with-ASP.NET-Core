@@ -56,6 +56,7 @@ namespace Books.Api.Services
 
         public Task<int> GetBookPages()
         {
+            // this long running task will run on a new thread
             return Task.Run(() =>
             {
                 _logger.LogInformation($"ThreadId when entering GetBookPages: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
